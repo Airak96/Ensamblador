@@ -22,8 +22,11 @@ section .data
         mensajen2 db "#2: "
         lenn2 equ $ - mensajen2
 
-        mensajen3 db "1.Suma",10,"2.Resta",10,"3.multiplicacion",10,"4.Division",10,"Selecciones una opcion: "
+        mensajen3 db "1.Suma",10,"2.Resta",10,"3.multiplicacion",10,"4.Division",10,"5.Salir",10,"Seleccione una opcion: "
         lenn3 equ $ - mensajen3
+
+        mensaje_error db "Ingrese una opcion valida!",10
+        len_mensaje_error equ $-mensaje_error
 
         mensajesuma db 10,"suma: "
         lensuma equ $ - mensajesuma
@@ -45,11 +48,15 @@ section .data
         mensajed db 10, "residuo: "
         lend equ $ - mensajed
 
+        mensaje_opcion db "Desea seguir? si(1) no (0)",10
+        len_mensaje_opcion equ $ - mensaje_opcion
+
 
 section .bss
         n1 resb 1
         n2 resb 1
         opcion resb 2
+        opcion1 resb 2
         residuo resb 1
         cociente resb 1
         suma resb 1
@@ -60,7 +67,7 @@ section .text
 _start: ; Etiqueta del inicio de segmento de codigo
 
 ; ingreso del primer numero
-
+ingresar:
         escribir mensajen1, lenn1 
 
         leer n1, 2
@@ -70,8 +77,9 @@ _start: ; Etiqueta del inicio de segmento de codigo
         escribir mensajen2, lenn2
 
         leer n2, 2
-        
+        ;jmp menu:
 ; Leer opcion
+menu:
          
          escribir mensajen3, lenn3
          leer opcion,2
@@ -86,6 +94,12 @@ _start: ; Etiqueta del inicio de segmento de codigo
          je multiplicacion
          cmp ah,4
          je division
+         cmp ah,5
+         je salir
+         
+         escribir mensaje_error, len_mensaje_error
+         jmp menu
+
 
         
         
@@ -105,6 +119,14 @@ sumar:
         escribir mensajesuma, lensuma
         escribir suma, 1
         escribir new_line, 1
+
+        escribir mensaje_opcion, len_mensaje_opcion
+        leer opcion1,2
+        mov ah,[opcion1]
+         sub ah,'0'
+        cmp ah,1
+        je ingresar
+        cmp ah,2
         jmp salir
 
 restar:
@@ -122,6 +144,14 @@ restar:
         escribir mensajeres, lenres
         escribir resta, 1
         escribir new_line, 1
+
+        escribir mensaje_opcion, len_mensaje_opcion
+        leer opcion1,2
+        mov ah,[opcion1]
+         sub ah,'0'
+        cmp ah,1
+        je ingresar
+        cmp ah,2
         jmp salir
 
 multiplicacion:
@@ -139,6 +169,14 @@ multiplicacion:
         escribir mensajeprod, lenprod
         escribir producto, 1
         escribir new_line, 1
+        
+        escribir mensaje_opcion, len_mensaje_opcion
+        leer opcion1,2
+        mov ah,[opcion1]
+         sub ah,'0'
+        cmp ah,1
+        je ingresar
+        cmp ah,2
         jmp salir
 
 division:
@@ -166,7 +204,17 @@ division:
         escribir residuo, 1
         ;++++++++++++++++++resultado++++++++++++++++++++++++++
         escribir new_line, 1
+        
+        escribir mensaje_opcion, len_mensaje_opcion
+        leer opcion1,2
+        mov ah,[opcion1]
+         sub ah,'0'
+        cmp ah,1
+        je ingresar
+        cmp ah,2
         jmp salir
+
+
 salir:        
         mov eax, 1
         int 80h

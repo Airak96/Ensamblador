@@ -15,8 +15,7 @@ ciclo:
     jz salir
     dec cx
     jnz imprimir
-    ;cmp cx,0
-    ;jmp salir
+
 
 imprimir:
         
