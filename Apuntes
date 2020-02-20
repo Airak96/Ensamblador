@@ -1,0 +1,76 @@
+salto no condicional
+salto condicional -> JZ JG JR
+Loop -> establecer ciclos
+Call -> subrutinas
+
+cmp -> compare
+       altera bandera
+       n1 == n2
+             Z = 1(ZR)
+ leer_opcion opcion,2
+    mov ah, [opcion]
+    sub ah, '0'
+
+
+
+ cmp ah,1
+
+-------------
+ cmp (3,3)
+      ZF=1    CF=0
+
+ cmp (4,3)
+     ZF=0     CF=0
+ 
+ cmp (3,4)
+    ZF=0    CF=1
+
+
+Jg -> 1er operando > 2do operando
+salta cuando ZF=0  CF=0
+
+Jng -> 1er operando < 2do operando
+salta cuando ZF=0  CF=1
+
+je -> iguales
+
+js -> si el numero es negativo
+
+jz -> si es igual a 0
+jnz -> mientras no sea igual a 0
+
+ss
+e
++push
+-pop
+
+mov eax,6
+moc ebx,5
+
+push eax; esp -4
+push ebx ; esp-4 el sp top esta en ebx 5
+
+pop dx ; esp +4 el valor del top sp pasa a dx y sp se dezplaza a eax
+
+
+[1,0,0,0,0,0,0,5,6]
+
+mov ax,[esp -4]
+
+********
+Loop
+ecx = 0
+deja de saltar
+
+ecx != 0
+saltara a un espacio de memoria especifica
+loop etiqueta -> dex ecx -> trabaja solo con datos enteros
+
+Call no altera banderas ni registros de pg
+saltos largos se puede saltar a diferentes segmentos
+subrutinas(S.O)
+call etiqueta 
+call trabaja con ret call - ret
+
+
+
